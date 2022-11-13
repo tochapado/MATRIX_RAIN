@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Matrix has you..</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: 'Noto Sans JP', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #111;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      const canvas = document.querySelector('#canvas');
+      const ctx = canvas.getContext('2d');
+      const canvasWidth = window.innerWidth;
+      const canvasHeight = window.innerHeight;
+      const maxCharCount = 100000;
+      const fontSize = 12;
+      const maxColumns = canvasWidth / fontSize;
+      const charArray = ['人', 'お', '社', '会', 'の', 'す', 'べ', 'て', 'と', '平', 'で', 'る', 'こ', 'き', 'な', 'い', 'す', 'は', 'ゐ', ];
+      let fallingCharArray = [];
+      let frames = 0;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      class FallingChar {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+        };
+        draw(ctx) {
+          this.value = charArray[Math.floor(Math.random() * (charArray.length - 1))];
+          this.speed = (Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
+          ctx.fillStyle = 'rgba(0, 255, 0, 1)';
+          ctx.font = fontSize + 'px sans-serif';
+          ctx.fillText(this.value, this.x, this.y);
+          this.y += this.speed;
+          if(this.y > canvasHeight) {
+            this.draw.y = Math.random() * canvasHeight / 2 - 50;
+            this.x = Math.floor(Math.random() * maxColumns) * fontSize;
+            this.speed = (-Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
+          };
+        };
+      };
+      const update = () => {
+        if(fallingCharArray.length < maxCharCount) {
+          let fallingChar = new FallingChar(
+            Math.floor(Math.random() * maxColumns) * fontSize,
+            (Math.random() * canvasHeight) / 2 - 50
+          );
+          fallingCharArray.push(fallingChar);
+        }
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        for(let i = 0; i < fallingCharArray.length && frames % 2 == 0; i++) {
+          fallingCharArray[i].draw(ctx);
+        };
+        requestAnimationFrame(update);
+        frames++;
+      };
+      update();
+    </script>
+  </body>
+</html>
