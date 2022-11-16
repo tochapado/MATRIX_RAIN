@@ -29,7 +29,7 @@
       const canvasWidth = window.innerWidth;
       const canvasHeight = window.innerHeight;
       const maxCharCount = 100000;
-      const fontSize = 50;
+      const fontSize = 12;
       const maxColumns = canvasWidth / fontSize;
       const charArray = ['人', 'お', '社', '会', 'の', 'す', 'べ', 'て', 'と', '平', 'で', 'る', 'こ', 'き', 'な', 'い', 'す', 'は', 'ゐ', ];
       let fallingCharArray = [];
@@ -44,7 +44,7 @@
         };
         draw(ctx) {
           this.value = charArray[Math.floor(Math.random() * (charArray.length - 1))];
-          this.speed = (Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
+          this.speed = (Math.random() * fontSize * 3) / 10 + (fontSize * 3) / 10;
           ctx.fillStyle = 'rgba(0, 255, 0, 1)';
           ctx.font = fontSize + 'px sans-serif';
           ctx.fillText(this.value, this.x, this.y);
