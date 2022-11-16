@@ -49,11 +49,6 @@
           ctx.font = fontSize + 'px sans-serif';
           ctx.fillText(this.value, this.x, this.y);
           this.y += this.speed;
-          if(this.y > canvasHeight) {
-            this.draw.y = 0;
-            this.x = Math.floor(Math.random() * maxColumns) * fontSize;
-            this.speed = (-Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
-          };
         };
       };
       const update = () => {
@@ -64,7 +59,7 @@
           );
           fallingCharArray.push(fallingChar);
         }
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         for(let i = 0; i < fallingCharArray.length && frames % 2 == 0; i++) {
           fallingCharArray[i].draw(ctx);
