@@ -44,13 +44,13 @@
         };
         draw(ctx) {
           this.value = charArray[Math.floor(Math.random() * (charArray.length - 1))];
-          this.speed = (Math.random() * fontSize * 3) / 10 + (fontSize * 3) / 10;
-          ctx.fillStyle = 'rgba(0, 255, 0, 1)';
+          this.speed = (Math.random() * fontSize * 3) / 3 + (fontSize * 3) / 3;
+          ctx.fillStyle = 'hsl(120, 100%, 50%)';
           ctx.font = fontSize + 'px sans-serif';
           ctx.fillText(this.value, this.x, this.y);
           this.y += this.speed;
           if(this.y > canvasHeight) {
-            this.draw.y = Math.random() * canvasHeight / 2 - 50;
+            this.draw.y = 0;
             this.x = Math.floor(Math.random() * maxColumns) * fontSize;
             this.speed = (-Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4;
           };
@@ -60,7 +60,7 @@
         if(fallingCharArray.length < maxCharCount) {
           let fallingChar = new FallingChar(
             Math.floor(Math.random() * maxColumns) * fontSize,
-            (Math.random() * canvasHeight) / 2 - 50
+            0
           );
           fallingCharArray.push(fallingChar);
         }
