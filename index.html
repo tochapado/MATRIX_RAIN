@@ -45,7 +45,7 @@
         draw(ctx) {
           this.value = charArray[Math.floor(Math.random() * (charArray.length - 1))];
           this.speed = (Math.random() * fontSize * 3) / 3 + (fontSize * 3) / 3;
-          ctx.fillStyle = 'hsl(120, 100%, 50%)';
+          ctx.fillStyle = 'hsla(120, 100%, 50%, 1)';
           ctx.font = fontSize + 'px sans-serif';
           ctx.fillText(this.value, this.x, this.y);
           this.y += this.speed;
@@ -59,7 +59,7 @@
           );
           fallingCharArray.push(fallingChar);
         }
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         for(let i = 0; i < fallingCharArray.length && frames % 2 == 0; i++) {
           fallingCharArray[i].draw(ctx);
